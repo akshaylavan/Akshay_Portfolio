@@ -10,7 +10,6 @@ const Hero = () => {
   const nameRef = useRef(null);
   const roleRef = useRef(null);
   const descRef = useRef(null);
-  const ctaRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.5 });
@@ -48,13 +47,6 @@ const Hero = () => {
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
       "-=1"
-    )
-    
-    // CTA buttons animation
-    .fromTo(ctaRef.current.children,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power2.out" },
-      "-=0.5"
     );
 
     // Floating animation for the hero content
@@ -67,28 +59,6 @@ const Hero = () => {
     });
 
   }, []);
-
-  const scrollToProjects = () => {
-    const element = document.getElementById('projects');
-    if (element) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: element, offsetY: 80 },
-        ease: "power2.inOut"
-      });
-    }
-  };
-
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: element, offsetY: 80 },
-        ease: "power2.inOut"
-      });
-    }
-  };
 
   return (
     <section id="home" className="hero" ref={heroRef}>
@@ -107,15 +77,6 @@ const Hero = () => {
             dedicated to crafting innovative digital experiences through cutting-edge technology, 
             elegant design, and creative problem-solving. Let's build the future together!
           </p>
-          
-          <div ref={ctaRef} className="hero-cta">
-            <button className="btn btn-primary" onClick={scrollToProjects}>
-              View My Work
-            </button>
-            <button className="btn btn-outline" onClick={scrollToContact}>
-              Get In Touch
-            </button>
-          </div>
         </div>
         
         <div className="hero-visual">
