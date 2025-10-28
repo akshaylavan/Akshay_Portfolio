@@ -12,51 +12,67 @@ const Hero = () => {
   const descRef = useRef(null);
 
   useEffect(() => {
+    // Check if all refs are available
+    if (!heroRef.current || !nameRef.current || !roleRef.current || !descRef.current) return;
+
     const tl = gsap.timeline({ delay: 0.5 });
     
     // Hero background animation
     tl.fromTo(heroRef.current,
       { opacity: 0 },
       { opacity: 1, duration: 1 }
-    )
+    );
     
     // Name animation - slide in from left
-    .fromTo(nameRef.current,
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power2.out" }
-    )
+    if (nameRef.current) {
+      tl.fromTo(nameRef.current,
+        { x: -100, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: "power2.out" },
+        "-=0.5"
+      );
+    }
     
     // Role typing animation
-    .fromTo(roleRef.current,
-      { opacity: 0 },
-      { 
-        opacity: 1, 
-        duration: 0.5,
-        onComplete: () => {
-          gsap.to(roleRef.current, {
-            duration: 3,
-            text: "Full Stack Developer | Flutter Developer | Graphics Designer | Figma Expert",
-            ease: "none"
-          });
-        }
-      }
-    )
+    if (roleRef.current) {
+      tl.fromTo(roleRef.current,
+        { opacity: 0 },
+        { 
+          opacity: 1, 
+          duration: 0.5,
+          onComplete: () => {
+            if (roleRef.current) {
+              gsap.to(roleRef.current, {
+                duration: 3,
+                text: "Full Stack Developer | Flutter Developer | Graphics Designer | Figma Expert",
+                ease: "none"
+              });
+            }
+          }
+        },
+        "-=0.5"
+      );
+    }
     
     // Description fade in
-    .fromTo(descRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-      "-=1"
-    );
+    if (descRef.current) {
+      tl.fromTo(descRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
+        "-=0.5"
+      );
+    }
 
     // Floating animation for the hero content
-    gsap.to('.hero-content', {
-      y: -10,
-      duration: 2,
-      ease: "power1.inOut",
-      yoyo: true,
-      repeat: -1
-    });
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      gsap.to(heroContent, {
+        y: 10,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
 
   }, []);
 

@@ -20,15 +20,6 @@ const Experience = () => {
       type: 'work'
     },
     {
-      title: 'Mobile App Developer',
-      company: 'StartupHub Incubator',
-      period: 'Jan 2024 - May 2024',
-      location: 'Coimbatore, TN',
-      description: 'Led the development of cross-platform mobile applications using Flutter. Collaborated with UI/UX designers to create intuitive user interfaces and integrated real-time features.',
-      skills: ['Flutter', 'Dart', 'Firebase', 'REST APIs', 'Git'],
-      type: 'work'
-    },
-    {
       title: 'UI/UX Design Freelancer',
       company: 'Various Clients',
       period: 'Aug 2023 - Dec 2023',
